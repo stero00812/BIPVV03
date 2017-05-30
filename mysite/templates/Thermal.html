@@ -1,0 +1,86 @@
+
+<!doctype html>
+{% load staticfiles %}
+<html class="no-js" lang="en">
+  <head>
+  	<link rel="stylesheet" href="{% static 'css/foundation.css' %}">
+	<link rel="stylesheet" href="{% static 'datetimepicker/jquery.datetimepicker.css' %}">
+    <!--<link rel="stylesheet" type="text/css" href="datetimepicker/jquery.datetimepicker.css">-->
+    <title>Energyville BIPV Web Application</title>
+    
+       
+  </head>
+  <body>
+
+    <!-- Header and navigation -->
+<div class="sticky">
+	<nav class="top-bar" data-topbar role="navigation">
+		<ul class="title-area">
+			<li class="name">
+				<h1><a href="#"><img src="{% static 'img/energyville.png' %}" style="height: 2.4rem;" alt="logo" />&nbsp;&nbsp;EnergyVille PVIV Web Application</a></h1>
+			</li>
+			<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+		</ul>
+	</nav>
+</div>  
+
+			
+    <!-- FROM, TO, UPDATE BUTTON AND MEASUREMENT SET UP -->   
+    <div id="settings_div" class="row">
+        
+          <div class="large-12 columns">
+                <h4>Settings</h4>
+					<form action="/IntersolarWeb/" method="post">
+						{% csrf_token %}
+						<div class="large-3 columns">
+						<label>From (UTC)</label>
+						{{ form.Date_from }}
+						</div>
+						<div class="large-3 columns">
+						<label>To (UTC)</label>
+						{{ form.Date_to }}
+						</div>
+						<div class="large-3 columns">
+						<label>Measurement</label>
+						{{ form.select }}
+						</div>						
+						<div class="large-3 columns">
+						<input type="submit" value="Submit" style="margin-top:18px; width: 100%;" class="small radius button"/>
+						</div>			
+					</form>
+            </div>
+    </div>
+	
+    <!-- Graph -->  
+ 	
+	<div class="basic">
+	
+		{% include "C:/Users/Jonathan/Documents/Postdoc/Codes Python/Django website/mysite/Thermal_graph.html" %}    
+	</div>
+
+	
+	<!-- Datetimepicker -->   
+
+    <script src="{% static 'datetimepicker/jquery.js' %}"></script>
+    <script src="{% static 'datetimepicker/jquery.datetimepicker.js' %}"></script>
+    <script>
+        // Datetime picker
+        $('#id_Date_from').datetimepicker({
+            mask:'9999/19/39 29:59:59',
+            format:'Y/m/d H:i:s'
+            //formatTime:'H:i'
+        });
+		
+		$('#id_Date_to').datetimepicker({
+            mask:'9999/19/39 29:59:59',
+            format:'Y/m/d H:i:s'
+            //formatTime:'H:i'
+        });
+    </script>
+
+
+  </body>
+</html>
+
+
